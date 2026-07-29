@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>G.Padma Lakshmi</H3>
+<H3>212225230206.</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>29-07-2026</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,61 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+
+~~~
+## STEP 1: Importing the libraries
+
+
+import pandas as pd
+import numpy as np
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.model_selection import train_test_split
+STEP 2: Importing the dataset
+STEP 3: Taking care of missing data
+dataset = pd.read_csv("WineQuality.csv")
+print(dataset.head())
+STEP 3: Taking care of missing data
+
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, -1].values
+imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+X = imputer.fit_transform(X)
+
+
+## STEP 4: Encoding categorical data
+
+if dataset.iloc[:, -1].dtype == 'object':
+    le = LabelEncoder()
+    y = le.fit_transform(y)
+
+## STEP 5: Normalizing the data
+sc = StandardScaler()
+X = sc.fit_transform(X)
+
+## STEP 6: Splitting the data into Train and Test
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42
+)
+
+print("X_train shape:", X_train.shape)
+print("X_test shape :", X_test.shape)
+print("y_train shape:", y_train.shape)
+print("y_test shape :", y_test.shape)
+
+~~~
 
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+![alt text](<Screenshot 2026-07-29 142125.png>)
+ ![alt text](<Screenshot 2026-07-29 142057.png>)
+  ![alt text](<Screenshot 2026-07-29 142102.png>) 
+  ![alt text](<Screenshot 2026-07-29 142109.png>) 
+  ![alt text](<Screenshot 2026-07-29 142113.png>) 
+  ![alt text](<Screenshot 2026-07-29 142118.png>)
 
 
 ## RESULT:
