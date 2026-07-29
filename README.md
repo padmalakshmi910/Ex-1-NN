@@ -92,7 +92,7 @@ print("y_test shape :", y_test.shape)
   ![alt text](<Screenshot 2026-07-29 142109.png>) 
   ![alt text](<Screenshot 2026-07-29 142113.png>) 
   ![alt text](<Screenshot 2026-07-29 142118.png>)
-
+![alt text](<Screenshot 2026-07-29 142125.png>)
 
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
