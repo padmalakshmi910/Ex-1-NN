@@ -86,7 +86,6 @@ print("y_test shape :", y_test.shape)
 
 
 ## OUTPUT:
-![alt text](<Screenshot 2026-07-29 142125.png>)
  ![alt text](<Screenshot 2026-07-29 142057.png>)
   ![alt text](<Screenshot 2026-07-29 142102.png>) 
   ![alt text](<Screenshot 2026-07-29 142109.png>) 
