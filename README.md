@@ -168,7 +168,9 @@ print("\nData Preprocessing Completed Successfully")
 ![alt text](<Screenshot 2026-07-30 162345-1.png>)
 ![alt text](<Screenshot 2026-07-30 162352-1.png>)
 ![alt text](<Screenshot 2026-07-30 162412-1.png>)
+
 ## RESULT:
+
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
 
 
