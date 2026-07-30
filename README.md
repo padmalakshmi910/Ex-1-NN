@@ -39,60 +39,135 @@ STEP 6:Splitting the data into test and train<BR>
 ##  PROGRAM:
 
 ~~~
+
 ## STEP 1: Importing the libraries
 
-
-import pandas as pd
 import numpy as np
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.model_selection import train_test_split
-STEP 2: Importing the dataset
-STEP 3: Taking care of missing data
-dataset = pd.read_csv("WineQuality.csv")
-print(dataset.head())
-STEP 3: Taking care of missing data
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-X = dataset.iloc[:, :-1].values
-y = dataset.iloc[:, -1].values
-imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
-X = imputer.fit_transform(X)
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+
+print("Libraries Imported Successfully")
+
+
+## STEP 2: Importing the dataset
+
+dataset = pd.read_csv("Churn_Modelling.csv")
+
+print("\nDataset Loaded Successfully")
+print(dataset.head())
+
+print("\nDataset Shape")
+print(dataset.shape)
+
+print("\nDataset Information")
+print(dataset.info())
+
+print("\nStatistical Summary")
+print(dataset.describe())
+
+# Selecting Features and Target Variable
+
+# Removing unnecessary columns
+X = dataset.iloc[:, 3:13].values
+
+# Target variable
+y = dataset.iloc[:, 13].values
+
+print("\nFeatures Shape :", X.shape)
+print("Target Shape :", y.shape)
+
+
+## STEP 3: Taking care of missing data
+
+print("\nChecking Missing Values")
+
+print(dataset.isnull().sum())
+
+# Numerical columns
+imputer = SimpleImputer(missing_values=np.nan,
+                        strategy='mean')
+
+imputer.fit(X[:, [0,3,4,5,6,7,9]])
+
+X[:, [0,3,4,5,6,7,9]] = imputer.transform(X[:, [0,3,4,5,6,7,9]])
+
+print("\nMissing Values Handled Successfully")
 
 
 ## STEP 4: Encoding categorical data
 
-if dataset.iloc[:, -1].dtype == 'object':
-    le = LabelEncoder()
-    y = le.fit_transform(y)
+# One Hot Encoding for Geography
+
+ct = ColumnTransformer(
+    transformers=[
+        ('encoder', OneHotEncoder(), [1])
+    ],
+    remainder='passthrough'
+)
+
+X = np.array(ct.fit_transform(X))
+
+# Label Encoding for Gender
+
+le = LabelEncoder()
+
+X[:,4] = le.fit_transform(X[:,4])
+
+print("\nCategorical Data Encoded Successfully")
 
 ## STEP 5: Normalizing the data
+
 sc = StandardScaler()
+
 X = sc.fit_transform(X)
 
-## STEP 6: Splitting the data into Train and Test
+print("\nData Normalized Successfully")
+
+## STEP 6: Splitting the dataset into
+# Training set and Test set
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.2,
+    X,
+    y,
+    test_size=0.20,
     random_state=42
 )
 
-print("X_train shape:", X_train.shape)
-print("X_test shape :", X_test.shape)
-print("y_train shape:", y_train.shape)
-print("y_test shape :", y_test.shape)
+print("\nDataset Split Completed")
+
+print("\nTraining Feature Shape :", X_train.shape)
+print("Testing Feature Shape :", X_test.shape)
+
+print("\nTraining Target Shape :", y_train.shape)
+print("Testing Target Shape :", y_test.shape)
+
+print("\nFirst Five Rows of Processed Data")
+
+print(pd.DataFrame(X_train).head())
+
+print("\nData Preprocessing Completed Successfully")
 
 ~~~
 
 
 ## OUTPUT:
-![alt text](<Screenshot 2026-07-29 142057.png>)
-![alt text](<Screenshot 2026-07-29 142102.png>) 
-![alt text](<Screenshot 2026-07-29 142109.png>) 
-![alt text](<Screenshot 2026-07-29 142113.png>) 
-![alt text](<Screenshot 2026-07-29 142118.png>)
-![alt text](<Screenshot 2026-07-29 142125.png>)
 
+![alt text](<Screenshot 2026-07-30 162231-1.png>)
+![alt text](<Screenshot 2026-07-30 162246-1.png>)
+![alt text](<Screenshot 2026-07-30 162319-1.png>)
+![alt text](<Screenshot 2026-07-30 162328-1.png>)
+![alt text](<Screenshot 2026-07-30 162338-1.png>)
+![alt text](<Screenshot 2026-07-30 162345-1.png>)
+![alt text](<Screenshot 2026-07-30 162352-1.png>)
+![alt text](<Screenshot 2026-07-30 162412-1.png>)
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
 
